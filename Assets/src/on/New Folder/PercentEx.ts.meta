@@ -1,0 +1,79 @@
+fileFormatVersion: 2
+guid: 1140b80596f71e542bd55f1fd603ab6c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nclass
+    PercentEx extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this._isIconActive = false;\\r\\n       
+    this._isDoneFirstTrig = false;\\r\\n        // \uBC31\uC2E0 \uC2DC\uAC04 \uCCB4\uD06C\\r\\n       
+    this.startTime = 0;\\r\\n        this.finishTime = 5;\\r\\n        this.TimeCheck
+    = false;\\r\\n        /*private Vaccine() {\\r\\n            this.vaccineCondition+=1;\\r\\n           
+    this.vaccine.text = \\\"\uBC31\uC2E0 \uD604\uD669\\\"+\\\"(\\\"+this.vaccineCondition+\\\"/\\\"+this.vaccineClear+\\\")\\\";\\r\\n       
+    }*/\\r\\n    }\\r\\n    /* \uBC31\uC2E0 \uD604\uD669\uD310\\r\\n    @Header(\\\"[Source]\\\")\\r\\n   
+    @SerializeField() private vaccine : Text;\\r\\n    private vaccineClear : int=5;\\r\\n   
+    private vaccineCondition : int=0;*/\\r\\n    Start() {\\r\\n        this.animation
+    = this.gameObject.GetComponentInParent($typeof(UnityEngine_1.Animation));\\r\\n   
+    }\\r\\n    Update() {\\r\\n        if (this._isDoneFirstTrig && this._canvas1.gameObject.activeSelf)
+    {\\r\\n            this.UpdateIconRotation();\\r\\n        }\\r\\n        if
+    (this.TimeCheck) {\\r\\n            this.startTime += UnityEngine_1.Time.deltaTime;\\r\\n           
+    this.HideIcon();\\r\\n            this.CreateSlide();\\r\\n            this.isTimePercent.value
+    += this.startTime;\\r\\n            if (this.startTime > this.finishTime) {\\r\\n               
+    this.HideSlide();\\r\\n                this.AnimationPlay();\\r\\n               
+    this.isTimePercent.value = 0;\\r\\n                //this.Vaccine();\\r\\n               
+    this.TimeCheck = false;\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n   
+    OnTriggerEnter(coll) {\\r\\n        if (coll != (ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent)($typeof(UnityEngine_1.Collider)))
+    {\\r\\n            return;\\r\\n        }\\r\\n        this.ShowIcon();\\r\\n       
+    this.OnTriggerEnterEvent?.Invoke();\\r\\n    }\\r\\n    OnTriggerExit(coll) {\\r\\n       
+    if (coll != (ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent)($typeof(UnityEngine_1.Collider)))
+    {\\r\\n            return;\\r\\n        }\\r\\n        this.HideIcon();\\r\\n       
+    this.HideSlide();\\r\\n        this.TimeCheck = false;\\r\\n        this.startTime
+    = 0;\\r\\n        this.isTimePercent.value = 0;\\r\\n        this.OnTriggerExitEvent?.Invoke();\\r\\n   
+    }\\r\\n    ShowIcon() {\\r\\n        if (!this._isDoneFirstTrig) {\\r\\n           
+    this.CreateIcon();\\r\\n            this._isDoneFirstTrig = true;\\r\\n       
+    }\\r\\n        else {\\r\\n            this._canvas1.gameObject.SetActive(true);\\r\\n       
+    }\\r\\n        this._isIconActive = true;\\r\\n    }\\r\\n    HideIcon() {\\r\\n       
+    this._canvas1.gameObject.SetActive(false);\\r\\n        this._isIconActive =
+    false;\\r\\n    }\\r\\n    CreateIcon() {\\r\\n        if (this._canvas1 ===
+    undefined) {\\r\\n            const canvas1 = UnityEngine_1.GameObject.Instantiate(this.prefIconCanvas,
+    this.iconPosition);\\r\\n            this._canvas1 = canvas1.GetComponent($typeof(UnityEngine_1.Canvas));\\r\\n           
+    this._button = canvas1.GetComponentInChildren($typeof(UnityEngine_UI_1.Button));\\r\\n           
+    this._canvas1.transform.position = this.iconPosition.position;\\r\\n        }\\r\\n       
+    this._cachedWorldCamera = UnityEngine_1.Object.FindObjectOfType($typeof(UnityEngine_1.Camera));\\r\\n       
+    this._canvas1.worldCamera = this._cachedWorldCamera;\\r\\n        this._button.onClick.AddListener(()
+    => {\\r\\n            this.OnClickIcon();\\r\\n        });\\r\\n    }\\r\\n   
+    CreateSlide() {\\r\\n        const canvas2 = UnityEngine_1.GameObject.Instantiate(this.percent,
+    this.iconPosition);\\r\\n        this._canvas2 = canvas2.GetComponent($typeof(UnityEngine_1.Canvas));\\r\\n       
+    this.isTimePercent = canvas2.GetComponentInChildren($typeof(UnityEngine_UI_1.Slider));\\r\\n       
+    this._canvas2.transform.position = this.iconPosition.position;\\r\\n        this._cachedWorldCamera
+    = UnityEngine_1.Object.FindObjectOfType($typeof(UnityEngine_1.Camera));\\r\\n       
+    this._canvas2.worldCamera = this._cachedWorldCamera;\\r\\n        this._canvas2.gameObject.SetActive(true);\\r\\n   
+    }\\r\\n    HideSlide() {\\r\\n        this._canvas2.gameObject.SetActive(false);\\r\\n       
+    this._isIconActive = false;\\r\\n    }\\r\\n    UpdateIconRotation() {\\r\\n       
+    this._canvas1.transform.LookAt(this._cachedWorldCamera.transform);\\r\\n    }\\r\\n   
+    OnClickIcon() {\\r\\n        this.OnClickEvent?.Invoke();\\r\\n        this.TimeCount();\\r\\n   
+    }\\r\\n    AnimationPlay() {\\r\\n        this.animation.Play(\\\"Crate_Open\\\");\\r\\n   
+    }\\r\\n    TimeCount() {\\r\\n        this.TimeCheck = true;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = PercentEx;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGVyY2VudEV4LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUGVyY2VudEV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDZDQUFxSDtBQUNySCxtREFBZ0Q7QUFFaEQsNkVBQTREO0FBRzVELE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFBNUQ7O1FBbUJZLGtCQUFhLEdBQVksS0FBSyxDQUFDO1FBQy9CLHFCQUFnQixHQUFZLEtBQUssQ0FBQztRQUcxQyxXQUFXO1FBQ0gsY0FBUyxHQUFXLENBQUMsQ0FBQztRQUN0QixlQUFVLEdBQVcsQ0FBQyxDQUFDO1FBQ3ZCLGNBQVMsR0FBYSxLQUFLLENBQUM7UUFrSHBDOzs7V0FHRztJQUVQLENBQUM7SUFwSEc7Ozs7dUNBSW1DO0lBRTNCLEtBQUs7UUFDVCxJQUFJLENBQUMsU0FBUyxHQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsb0JBQW9CLFNBQUMsdUJBQVMsRUFBRyxDQUFDO0lBQ3JFLENBQUM7SUFDTyxNQUFNO1FBQ1YsSUFBSSxJQUFJLENBQUMsZ0JBQWdCLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFO1lBQzlELElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDO1NBQzdCO1FBQ0QsSUFBRyxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ2YsSUFBSSxDQUFDLFNBQVMsSUFBRSxrQkFBSSxDQUFDLFNBQVMsQ0FBQztZQUMvQixJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7WUFDaEIsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQ25CLElBQUksQ0FBQyxhQUFhLENBQUMsS0FBSyxJQUFFLElBQUksQ0FBQyxTQUFTLENBQUM7WUFDekMsSUFBRyxJQUFJLENBQUMsU0FBUyxHQUFDLElBQUksQ0FBQyxVQUFVLEVBQUU7Z0JBQy9CLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztnQkFDakIsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO2dC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\",\"assetPath\":\"Assets/src/on/New
+    Folder/PercentEx.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.AnimationModule\",\"name\":\"animationClip\",\"type\":\"UnityEngine.AnimationClip\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"prefIconCanvas\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"[Icon]\\\"\"]},{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"percent\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"iconPosition\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"OnClickEvent\",\"type\":\"UnityEngine.Events.UnityEvent\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"[Unity
+    Event]\\\"\"]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"OnTriggerEnterEvent\",\"type\":\"UnityEngine.Events.UnityEvent\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"OnTriggerExitEvent\",\"type\":\"UnityEngine.Events.UnityEvent\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"PercentEx\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: 9b4c03cb7a9ab094e84952a3c805ff00
+  onlyWriteTrigger: 0

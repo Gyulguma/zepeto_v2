@@ -22,7 +22,7 @@ ScriptedImporter:
     { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
     ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass OpenBox extends ZEPETO_Script_1.ZepetoScriptBehaviour
     {\r\n    Start() {\r\n        this.ani = this.gameObject.GetComponent($typeof(UnityEngine_1.Animation));\r\n       
-    this.ani.Play();\r\n    }\r\n}\r\nexports.default = OpenBox;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3BlbkJveC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk9wZW5Cb3gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBd0M7QUFDeEMsaURBQXFEO0FBRXJELE1BQXFCLE9BQVEsU0FBUSxxQ0FBcUI7SUFFdEQsS0FBSztRQUNELElBQUksQ0FBQyxHQUFHLEdBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsdUJBQVMsRUFBRyxDQUFDO1FBQ25ELElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUE7SUFDbkIsQ0FBQztDQUVKO0FBUEQsMEJBT0MifQ==","assetPath":"Assets/scr/on/New
+    this.ani.Play();\r\n    }\r\n}\r\nexports.default = OpenBox;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3BlbkJveC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk9wZW5Cb3gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBd0M7QUFDeEMsaURBQXFEO0FBRXJELE1BQXFCLE9BQVEsU0FBUSxxQ0FBcUI7SUFFdEQsS0FBSztRQUNELElBQUksQ0FBQyxHQUFHLEdBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsdUJBQVMsRUFBRyxDQUFDO1FBQ25ELElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUE7SUFDbkIsQ0FBQztDQUVKO0FBUEQsMEJBT0MifQ==","assetPath":"Assets/src/on/New
     Folder/OpenBox.ts","manifest":{"properties":[],"name":"OpenBox","description":"","hasAnimatorMove":false},"isCompiled":true}'
   typescriptHash: 65c468a3043228305e268d9281806abc
   onlyWriteTrigger: 0

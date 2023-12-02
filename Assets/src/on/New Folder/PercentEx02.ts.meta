@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d1e34e403fdcc94faa9113baac4bf81
+guid: f8a938152c1a642489ede89156283e5e
 importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
 ScriptedImporter:
   internalIDToNameTable: []
@@ -20,8 +20,8 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
-    OpenCube extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n   
-    }\r\n}\r\nexports.default = OpenCube;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3BlbkN1YmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJPcGVuQ3ViZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUVyRCxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBR3ZELEtBQUs7SUFFTCxDQUFDO0NBRUo7QUFQRCwyQkFPQyJ9","assetPath":"Assets/src/on/New
-    Folder/OpenCube.ts","manifest":{"properties":[],"name":"OpenCube","description":"","hasAnimatorMove":false},"isCompiled":true}'
-  typescriptHash: 8fa650f5ee541dc6b85e95c4b4800ef4
+    PercentEx02 extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n   
+    }\r\n}\r\nexports.default = PercentEx02;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGVyY2VudEV4MDIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQZXJjZW50RXgwMi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQU1yRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBRTFELEtBQUs7SUFDTCxDQUFDO0NBRUo7QUFMRCw4QkFLQyJ9","assetPath":"Assets/src/on/New
+    Folder/PercentEx02.ts","manifest":{"properties":[],"name":"PercentEx02","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: b40e98fd7ce80e621d658e4ecbc46798
   onlyWriteTrigger: 0
