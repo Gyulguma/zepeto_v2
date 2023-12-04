@@ -1,11 +1,13 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Button, Image } from 'UnityEngine.UI';
-import { Animator, AnimationClip, HumanBodyBones, Vector3, WaitForEndOfFrame, Collider } from 'UnityEngine';
+import { Animator, AnimationClip, HumanBodyBones, Material, Renderer, Vector3, SkinnedMeshRenderer, WaitForEndOfFrame, Collider } from 'UnityEngine';
 import { SpawnInfo, ZepetoPlayers, LocalPlayer, ZepetoCharacter, ZepetoPlayer, KnowSockets } from 'ZEPETO.Character.Controller';
 import { WorldService } from 'ZEPETO.World';
 
 export default class CharacterController extends ZepetoScriptBehaviour {
 
+    public newColorMaterial : Material;
+    public changeColorButton : Button;
     public crouchButton: Button;
     public attackButton: Button;
     public Button3: Button;
@@ -18,6 +20,12 @@ export default class CharacterController extends ZepetoScriptBehaviour {
     private characterCenterY: double;
     private characterVisualHeight: double;
     private player: LocalPlayer
+
+    private _originalColorMaterial : Material;
+    private _originalAnimeMaterials : Material[];
+    private _animeRend : Renderer;
+    private _bodyRend : Renderer;
+    private _bodyRends : Renderer[];
 
     Start() {
         this.crouchButton.onClick.AddListener(() => {
@@ -43,6 +51,17 @@ export default class CharacterController extends ZepetoScriptBehaviour {
                 this._localPlayerAnimator.SetBool("isZombie", true);
             }
         })
+        // Replace with the preset material when the button is pressed
+        this.changeColorButton.onClick.AddListener(() => {
+            if(this._zepetoCharacter != null) {
+                this._bodyRend.material = this.newColorMaterial;
+                
+                if(this._animeRend != null) {
+                    let tempMaterials : Material[] = [this._animeRend.sharedMaterials[0],this._animeRend.sharedMaterials[1],this.newColorMaterial,this._animeRend.sharedMaterials[3]];
+                    this._animeRend.sharedMaterials = tempMaterials;
+                }
+            }
+        });
 
         ZepetoPlayers.instance.CreatePlayerWithUserId(WorldService.userId, new SpawnInfo(), true);
 
@@ -55,6 +74,17 @@ export default class CharacterController extends ZepetoScriptBehaviour {
 
             this._zepetoCharacter.gameObject.tag = "Player";
             console.log("middle: "+this._zepetoCharacter.tag);
+
+            // Find the material of the local player's zepeto context
+            this._bodyRend= this._zepetoCharacter.Context.GetComponentInChildren<SkinnedMeshRenderer>();
+            // Determine if it is an animated avatar and save related information
+            this._bodyRends= this._zepetoCharacter.GetComponentsInChildren<SkinnedMeshRenderer>();
+            this._bodyRends.forEach((currentRenderer) =>{
+                if(currentRenderer.name.includes("ANIME_BASEMODEL")){
+                    this._animeRend = currentRenderer; 
+                    this._originalAnimeMaterials = this._animeRend.sharedMaterials;
+                }
+            });
         });
  
     }
