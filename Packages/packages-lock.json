@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "asset.commons": {
+      "version": "1.0.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://upm.zepeto.run"
+    },
+    "asset.mysteryhouse": {
+      "version": "1.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "asset.commons": "1.0.6"
+      },
+      "url": "https://upm.zepeto.run"
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,

@@ -6,8 +6,7 @@ import { ZepetoPlayers } from 'ZEPETO.Character.Controller';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
  
 export default class PercentEx extends ZepetoScriptBehaviour {
-    // AnimationClip
-    @SerializeField() private animationClip: AnimationClip; 
+    
     // Icon
     @Header("[Icon]")
     @SerializeField() private prefIconCanvas: GameObject;
@@ -20,6 +19,8 @@ export default class PercentEx extends ZepetoScriptBehaviour {
     public OnTriggerEnterEvent: UnityEvent;
     public OnTriggerExitEvent: UnityEvent;
  
+    private buttonCheck: boolean=false;
+    
     private _button: Button;
     private _canvas1: Canvas;
     private _canvas2: Canvas;   
@@ -34,54 +35,62 @@ export default class PercentEx extends ZepetoScriptBehaviour {
     private TimeCheck : boolean = false;
     private isTimePercent: Slider;
 
-    /* 백신 현황판
-    @Header("[Source]")
-    @SerializeField() private vaccine : Text;
-    private vaccineClear : int=5;
-    private vaccineCondition : int=0;*/
-
     private Start() {
         this.animation=this.gameObject.GetComponentInParent<Animation>();
+        this.CreateSlide();
+        this._canvas2.gameObject.SetActive(false);
+        
     }
     private Update() {
         if (this._isDoneFirstTrig && this._canvas1.gameObject.activeSelf) {
             this.UpdateIconRotation();
         }
         if(this.TimeCheck) {
-            this.startTime+=Time.deltaTime;
             this.HideIcon();
-            this.CreateSlide();
+            this.startTime+=Time.deltaTime;
+            this._canvas2.gameObject.SetActive(true);
+            console.log(this.isTimePercent.value);
+            console.log(this.startTime);
             this.isTimePercent.value+=this.startTime;
             if(this.startTime>this.finishTime) {
+                this.buttonCheck=true;
                 this.HideSlide();
                 this.AnimationPlay();
+                //여기에 백신현황
+
+                
+                //여기에 백신현황
                 this.isTimePercent.value=0;
-                //this.Vaccine();
                 this.TimeCheck=false;
             }
 
         }
     }
      
-    private OnTriggerEnter(coll: Collider) {
-        if (coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()) {
+    private OnTriggerEnter(coll : Collider) {
+        if(coll.gameObject.tag=="Player" && this.buttonCheck==false) {
+            if (coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()) {
             return;
+            }
+        
+            console.log(coll.gameObject.tag);
+            this.ShowIcon();
+            this.OnTriggerEnterEvent?.Invoke();
         }
-        this.ShowIcon();
-        this.OnTriggerEnterEvent?.Invoke();
     }
  
-    private OnTriggerExit(coll: Collider) {
-        if (coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()) {
-            return;
-        }
-         
-        this.HideIcon();
-        this.HideSlide();
-        this.TimeCheck=false;
-        this.startTime=0;
-        this.isTimePercent.value=0;
-        this.OnTriggerExitEvent?.Invoke();
+    private OnTriggerExit(coll : Collider) {
+        if(coll.gameObject.tag=="Player"&& this.buttonCheck==false) {
+            if (coll != ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent<Collider>()) {
+                return;
+            }
+            this.isTimePercent.value=0;
+            this.TimeCheck=false;
+            this.startTime=0;
+            this.HideIcon();
+            this.HideSlide();
+            this.OnTriggerExitEvent?.Invoke();
+        }    
     }
      
     public ShowIcon(){
@@ -109,6 +118,7 @@ export default class PercentEx extends ZepetoScriptBehaviour {
         }
         this._cachedWorldCamera = Object.FindObjectOfType<Camera>();
         this._canvas1.worldCamera = this._cachedWorldCamera;
+        this._canvas1.gameObject.SetActive(true);
  
         this._button.onClick.AddListener(() => {
             this.OnClickIcon();
@@ -116,13 +126,12 @@ export default class PercentEx extends ZepetoScriptBehaviour {
     }
 
     private CreateSlide() {
-        const canvas2 = GameObject.Instantiate(this.percent, this.iconPosition) as GameObject;
+        const canvas2 = GameObject.Instantiate(this.percent,this.iconPosition) as GameObject;
         this._canvas2 = canvas2.GetComponent<Canvas>();
         this.isTimePercent = canvas2.GetComponentInChildren<Slider>();
         this._canvas2.transform.position = this.iconPosition.position;
         this._cachedWorldCamera = Object.FindObjectOfType<Camera>();
         this._canvas2.worldCamera = this._cachedWorldCamera;
-        this._canvas2.gameObject.SetActive(true);
     }
 
     private HideSlide() {
@@ -145,9 +154,5 @@ export default class PercentEx extends ZepetoScriptBehaviour {
     private TimeCount() {
         this.TimeCheck=true;
     }
-    /*private Vaccine() {
-        this.vaccineCondition+=1;
-        this.vaccine.text = "백신 현황"+"("+this.vaccineCondition+"/"+this.vaccineClear+")";
-    }*/
     
 }
